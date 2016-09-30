@@ -10,19 +10,19 @@ Generate Quadratic
 <br>
 <p id="test"></p>
 <br>
-<input type="number" name="factor" style="width: 30px">(<input type="number" name="x0c" style="width: 30px">x + <input type="number" name="x0m" style="width: 30px">)(<input type="number" name="x1c" style="width: 30px">x + <input type="number" name="x1m" style="width: 30px">)
+<input type="number" id="factor" style="width: 30px">(<input type="number" id="x0c" style="width: 30px">x + <input type="number" id="x0m" style="width: 30px">)(<input type="number" id="x1c" style="width: 30px">x + <input type="number" id="x1m" style="width: 30px">)
 <br>
 <br>
-<button>
+<button onclick="checkSolution()">
 Check solution
 </button>
 
 <script>
-var factor = null;
+var factor_m = null;
 var x0_m = null;
 var x1_m = null;
-var x0 = null;
-var x1 = null;
+var x0_c = null;
+var x1_c = null;
 
 	function generateProblem() {
 		var radios = document.getElementsByName("difficulty");
@@ -37,11 +37,29 @@ var x1 = null;
     var formattedQuadratic = data_raw[0];
     var solution = data_raw[1];
     
-    
+    factor_m = solution[0]
+    x0_c = solution[1];
+    x0_m = solution[2];
+    x1_c = solution[3];
+    x1_m = solution[4];
     
     document.getElementById("test").innerHTML = formattedQuadratic;
 	}
 
+	function checkSolution() {
+ 				
+  }
+	function _userInput(value) {
+  	if(value == "") {
+    	return 1;
+    }
+    else if(value == -1) {
+    	return -1;
+    }
+    else {
+    	return value;
+    }
+  }
 	function createQuadratic(level) {
 		switch (level) {
 			case 1:
