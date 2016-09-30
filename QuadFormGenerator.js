@@ -3,12 +3,28 @@
 <input type="radio" name="difficulty" value="2">Level 2
 <input type="radio" name="difficulty" value="2">Level 3
 <br>
-<button onclick="generateProblems(1)">
+<br>
+<button onclick="generateProblems()">
 Generate Quadratic
+</button>
+<br>
+<p id="test"></p>
+<br>
+<input type="number" name="factor" style="width: 30px">(<input type="number" name="x0c" style="width: 30px">x + <input type="number" name="x0m" style="width: 30px">)(<input type="number" name="x1c" style="width: 30px">x + <input type="number" name="x1m" style="width: 30px">)
+<br>
+<br>
+<button>
+Check solution
 </button>
 
 <script>
-	function generateProblems(times) {
+var factor = null;
+var x0_m = null;
+var x1_m = null;
+var x0 = null;
+var x1 = null;
+
+	function generateProblem() {
 		var radios = document.getElementsByName("difficulty");
     
     for(var i = 0; i < radios.length; i++) {
@@ -17,14 +33,13 @@ Generate Quadratic
       }
     }
     
-    document.getElementById("debug").innerHTML = level;
-		var problem_set = [];
-
-		for(var i = 0; i < times; i++) {
-			problem_set[i] = createQuadratic(level) + "<br>";
-		}
+    var data_raw = createQuadratic(level);
+    var formattedQuadratic = data_raw[0];
+    var solution = data_raw[1];
     
-    document.getElementById("test").innerHTML = problem_set.join("");
+    
+    
+    document.getElementById("test").innerHTML = formattedQuadratic;
 	}
 
 	function createQuadratic(level) {
@@ -35,6 +50,9 @@ Generate Quadratic
 
 				var x0 = generateValueInt(min, max);
 				var x1 = generateValueInt(min, max);
+        var factor = 1;
+        var x0coefficent = 1;
+        var x1coefficent = 1;
 
 				var a = 1;
 				var b = x0 + x1;
@@ -50,6 +68,8 @@ Generate Quadratic
 				var x0 = generateValueInt(min, max);
 				var x1 = generateValueInt(min, max);
 				var factor = generateValueInt(factorMin, factorMax, true);
+        var x0coefficent = 1;
+        var x1coefficent = 1;
 
 				var a = factor;
 				var b = factor * (x0 + x1);
@@ -77,9 +97,10 @@ Generate Quadratic
 		}
 
 		quadratic = formatQuadratic(a, b, c);
+    solution = [factor, x0coefficent, x0, x1coefficent, x1];
     document.getElementById("test").innerHTML = quadratic;
     
-    return quadratic;
+    return [quadratic, solution];
 	}
 
 	function generateValueInt(min, max, factor=false) {
@@ -141,6 +162,4 @@ Generate Quadratic
     }
   }
 </script>
-
-<p id="test"></p>
 <p id="debug"></p>
