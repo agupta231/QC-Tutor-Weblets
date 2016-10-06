@@ -4,7 +4,7 @@
 <input type="radio" name="difficulty" value="2">Level 3
 <br>
 <br>
-<button onclick="generateProblems()">
+<button onclick="generateProblem()">
 Generate Quadratic
 </button>
 <br>
@@ -47,8 +47,20 @@ var x1_c = null;
 	}
 
 	function checkSolution() {
- 				
-  }
+ 		factor_m_local = _userInput(document.getElementById("factor").value);	
+ 		x0_m_local = _userInput(document.getElementById("x0m").value);
+ 		x0_c_local = _userInput(document.getElementById("x0c").value);
+ 		x1_m_local = _userInput(document.getElementById("x1m").value);
+ 		x1_c_local = _userInput(document.getElementById("x1c").value);
+
+ 		if(factor_m == factor_m_local && x0_m == x0_m_local && x0_c == x0_c_local && x1_m == x1_m_local && x1_c == x1_c_local) {
+ 			document.getElementById("debug").innerHTML = "true";
+ 		}
+ 		else {
+ 			document.getElementById("debug").innerHTML = "false";
+ 		}
+  	}
+
 	function _userInput(value) {
   	if(value == "") {
     	return 1;
@@ -152,7 +164,7 @@ var x1_c = null;
 			var t1 = String(a);
 		}
 		if(b == 0) {
-			var t2 = "";
+			var t2 = "0";
 		}
 		else if (b == 1) {
 			var t2 = "";
