@@ -1,53 +1,52 @@
 <p>Quadratic difficulty (1 - 3)</p>
+
 <input type="radio" name="difficulty" value="1" checked>Level 1
 <input type="radio" name="difficulty" value="2">Level 2
 <input type="radio" name="difficulty" value="2">Level 3
-<br>
-<br>
-<button onclick="generateProblem()">
-Generate Quadratic
-</button>
-<br>
-<p id="test"></p>
-<br>
+
+<br><br>
+
+<button onclick="generateProblem()">Generate Quadratic</button><br>
+<p id="quadratic"></p><br>
+
 <input type="number" id="factor" style="width: 30px">(<input type="number" id="x0c" style="width: 30px">x + <input type="number" id="x0m" style="width: 30px">)(<input type="number" id="x1c" style="width: 30px">x + <input type="number" id="x1m" style="width: 30px">)
-<br>
-<br>
+
+<br><br>
+
 <button onclick="checkSolution()">Check solution</button>
 <button onclick="giveUp()">Give Up</button>
 
-<p id="debug"></p>
-<p id="debug2"></p>
+<p id="answer"></p>
 
 <script>
-var factor_m = null;
-var x0_m = null;
-var x1_m = null;
-var x0_c = null;
-var x1_c = null;
+	var factor_m = null;
+	var x0_m = null;
+	var x1_m = null;
+	var x0_c = null;
+	var x1_c = null;
 
 	function generateProblem() {
-		document.getElementById("debug").innerHTML = " ";
+		document.getElementById("answer").innerHTML = " ";
 
 		var radios = document.getElementsByName("difficulty");
     
-    for(var i = 0; i < radios.length; i++) {
-    	if(radios[i].checked) {
-      	var level = i + 1;
-      }
-    }
+	    for(var i = 0; i < radios.length; i++) {
+	    	if(radios[i].checked) {
+	      	var level = i + 1;
+	      }
+	    }
     
-    var data_raw = createQuadratic(level);
-    var formattedQuadratic = data_raw[0];
-    var solution = data_raw[1];
-    
-    factor_m = solution[0]
-    x0_c = solution[1];
-    x0_m = solution[2];
-    x1_c = solution[3];
-    x1_m = solution[4];
-    
-    document.getElementById("test").innerHTML = formattedQuadratic;
+	    var data_raw = createQuadratic(level);
+	    var formattedQuadratic = data_raw[0];
+	    var solution = data_raw[1];
+	    
+	    factor_m = solution[0]
+	    x0_c = solution[1];
+	    x0_m = solution[2];
+	    x1_c = solution[3];
+	    x1_m = solution[4];
+	    
+	    document.getElementById("quadratic").innerHTML = formattedQuadratic;
 	}
 
 	function checkSolution() {
@@ -57,37 +56,38 @@ var x1_c = null;
  		x1_m_local = _userInput(document.getElementById("x1m").value);
  		x1_c_local = _userInput(document.getElementById("x1c").value);
 
-		document.getElementById("debug2").innerHTML = String(factor_m) + " " + String(x0_m) + " " + x0_c + " " + x1_m + " " + x1_c; 		
-    if(factor_m == factor_m_local) {
+    	if(factor_m == factor_m_local) {
  			if(x0_m == x0_m_local && x0_c == x0_c_local && x1_m == x1_m_local && x1_c == x1_c_local) {
- 				document.getElementById("debug").innerHTML = "true";
+ 				document.getElementById("answer").innerHTML = "true";
  			}
  			else if(x1_m == x0_m_local && x1_c == x0_c_local && x0_m == x1_m_local && x0_c == x1_c_local) {
-				document.getElementById("debug").innerHTML = "true";
+				document.getElementById("answer").innerHTML = "true";
  			}
  			else {
- 				document.getElementById("debug").innerHTML = "false";	
+ 				document.getElementById("answer").innerHTML = "false";	
  			}
  		}
  		else {
- 			document.getElementById("debug").innerHTML = "false";
+ 			document.getElementById("answer").innerHTML = "false";
  		}
-  }
+  	}
 	
-  function giveUp() {
-  	document.getElementById("debug").innerHTML = coefficient(factor_m) + "(" + coefficient(x0_c) + "x" + sepereator(x0_m) + x0_m + ")(" + coefficient(x1_c) + "x" + sepereator(x1_m) + x1_m + ")";
-  }
+  	function giveUp() {
+  		document.getElementById("answer").innerHTML = coefficient(factor_m) + "(" + coefficient(x0_c) + "x" + sepereator(x0_m) + x0_m + ")(" + coefficient(x1_c) + "x" + sepereator(x1_m) + x1_m + ")";
+  	}
+
 	function _userInput(value) {
-  	if(value == "") {
-    	return 1;
-    }
-    else if(value == -1) {
-    	return -1;
-    }
-    else {
-    	return value;
-    }
-  }
+	  	if(value == "") {
+	    	return 1;
+	    }
+	    else if(value == -1) {
+	    	return -1;
+	    }
+	    else {
+	    	return value;
+	    }
+	  }
+	  
 	function createQuadratic(level) {
 		switch (level) {
 			case 1:
@@ -96,9 +96,9 @@ var x1_c = null;
 
 				var x0 = generateValueInt(min, max);
 				var x1 = generateValueInt(min, max);
-        var factor = 1;
-        var x0coefficent = 1;
-        var x1coefficent = 1;
+		        var factor = 1;
+		        var x0coefficent = 1;
+		        var x1coefficent = 1;
 
 				var a = 1;
 				var b = x0 + x1;
@@ -114,8 +114,8 @@ var x1_c = null;
 				var x0 = generateValueInt(min, max);
 				var x1 = generateValueInt(min, max);
 				var factor = generateValueInt(factorMin, factorMax, true);
-        var x0coefficent = 1;
-        var x1coefficent = 1;
+		        var x0coefficent = 1;
+		        var x1coefficent = 1;
 
 				var a = factor;
 				var b = factor * (x0 + x1);
@@ -143,26 +143,26 @@ var x1_c = null;
 		}
 
 		quadratic = formatQuadratic(a, b, c);
-    solution = [factor, x0coefficent, x0, x1coefficent, x1];
-    document.getElementById("test").innerHTML = quadratic;
+    	solution = [factor, x0coefficent, x0, x1coefficent, x1];
+    	document.getElementById("quadratic").innerHTML = quadratic;
     
-    return [quadratic, solution];
+    	return [quadratic, solution];
 	}
 
 	function generateValueInt(min, max, factor=false) {
 		while(true) {
 			var value = Math.floor(Math.random() * (max - min + 1)) + min;
 			
-      if(factor) {
-      	if(value != 1 && value != 0) {
-        	return value;
-        }
-      }
-      else {
-      	if(value != 0) {
+		      if(factor) {
+		      	if(value != 1 && value != 0) {
+		        	return value;
+		        }
+		      }
+	     	else {
+		    	if(value != 0) {
 					return value;
 				}
-      }
+      		}
 		}
 	}
 
@@ -173,24 +173,26 @@ var x1_c = null;
 		else if(a == 1) {
 			var t1 = "";
 		}
-    else if (a == -1) {
-    	var t1 = "-";
-    }
+	    else if (a == -1) {
+	    	var t1 = "-";
+	    }
 		else{
 			var t1 = String(a);
 		}
+
 		if(b == 0) {
 			var t2 = "0";
 		}
 		else if (b == 1) {
 			var t2 = "";
 		}
-    else if(b == -1) {
-    	var t2 = "-";
-    }
+	    else if(b == -1) {
+	    	var t2 = "-";
+	    }
 		else {
 			var t2 = String(b);
 		}
+
 		if(c == 0) {
 			var t3 = ""
 		}
@@ -202,23 +204,24 @@ var x1_c = null;
 		return quadratic;
 	}
   
-  function sepereator(value) {
-  	if(value < 0) {
-    	return " ";
-    }
-    else {
-    	return " + ";
-    }
-  }
-  function coefficient(value) {
-  	if(value == -1) {
-    	return "-";
-    }
-    else if(value == 1){
-    	return "";
-    }
-    else {
-    	return value;
-    }
-  }
+	function sepereator(value) {
+		if(value < 0) {
+			return " ";
+		}
+		else {
+			return " + ";
+		}
+	}
+
+	function coefficient(value) {
+		if(value == -1) {
+			return "-";
+		}
+		else if(value == 1){
+			return "";
+		}
+		else {
+			return value;
+		}
+	}
 </script>
