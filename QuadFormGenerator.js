@@ -13,9 +13,11 @@ Generate Quadratic
 <input type="number" id="factor" style="width: 30px">(<input type="number" id="x0c" style="width: 30px">x + <input type="number" id="x0m" style="width: 30px">)(<input type="number" id="x1c" style="width: 30px">x + <input type="number" id="x1m" style="width: 30px">)
 <br>
 <br>
-<button onclick="checkSolution()">
-Check solution
-</button>
+<button onclick="checkSolution()">Check solution</button>
+<button onclick="giveUp()">Give Up</button>
+
+<p id="debug"></p>
+<p id="debug2"></p>
 
 <script>
 var factor_m = null;
@@ -55,11 +57,12 @@ var x1_c = null;
  		x1_m_local = _userInput(document.getElementById("x1m").value);
  		x1_c_local = _userInput(document.getElementById("x1c").value);
 
- 		if(factor_m == factor_m_local) {
+		document.getElementById("debug2").innerHTML = String(factor_m) + " " + String(x0_m) + " " + x0_c + " " + x1_m + " " + x1_c; 		
+    if(factor_m == factor_m_local) {
  			if(x0_m == x0_m_local && x0_c == x0_c_local && x1_m == x1_m_local && x1_c == x1_c_local) {
  				document.getElementById("debug").innerHTML = "true";
  			}
- 			else if(x1_m = x0_m_local && x1_c == x0_c_local && x0_m == x1_m_local && x0_c == x1_c_local) {
+ 			else if(x1_m == x0_m_local && x1_c == x0_c_local && x0_m == x1_m_local && x0_c == x1_c_local) {
 				document.getElementById("debug").innerHTML = "true";
  			}
  			else {
@@ -69,8 +72,11 @@ var x1_c = null;
  		else {
  			document.getElementById("debug").innerHTML = "false";
  		}
-  	}
-
+  }
+	
+  function giveUp() {
+  	document.getElementById("debug").innerHTML = coefficient(factor_m) + "(" + coefficient(x0_c) + "x" + sepereator(x0_m) + x0_m + ")(" + coefficient(x1_c) + "x" + sepereator(x1_m) + x1_m + ")";
+  }
 	function _userInput(value) {
   	if(value == "") {
     	return 1;
@@ -179,6 +185,9 @@ var x1_c = null;
 		else if (b == 1) {
 			var t2 = "";
 		}
+    else if(b == -1) {
+    	var t2 = "-";
+    }
 		else {
 			var t2 = String(b);
 		}
@@ -201,5 +210,15 @@ var x1_c = null;
     	return " + ";
     }
   }
+  function coefficient(value) {
+  	if(value == -1) {
+    	return "-";
+    }
+    else if(value == 1){
+    	return "";
+    }
+    else {
+    	return value;
+    }
+  }
 </script>
-<p id="debug"></p>
