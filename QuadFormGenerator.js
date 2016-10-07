@@ -25,6 +25,8 @@ var x0_c = null;
 var x1_c = null;
 
 	function generateProblem() {
+		document.getElementById("debug").innerHTML = " ";
+
 		var radios = document.getElementsByName("difficulty");
     
     for(var i = 0; i < radios.length; i++) {
@@ -53,8 +55,16 @@ var x1_c = null;
  		x1_m_local = _userInput(document.getElementById("x1m").value);
  		x1_c_local = _userInput(document.getElementById("x1c").value);
 
- 		if(factor_m == factor_m_local && x0_m == x0_m_local && x0_c == x0_c_local && x1_m == x1_m_local && x1_c == x1_c_local) {
- 			document.getElementById("debug").innerHTML = "true";
+ 		if(factor_m == factor_m_local) {
+ 			if(x0_m == x0_m_local && x0_c == x0_c_local && x1_m == x1_m_local && x1_c == x1_c_local) {
+ 				document.getElementById("debug").innerHTML = "true";
+ 			}
+ 			else if(x1_m = x0_m_local && x1_c == x0_c_local && x0_m == x1_m_local && x0_c == x1_c_local) {
+				document.getElementById("debug").innerHTML = "true";
+ 			}
+ 			else {
+ 				document.getElementById("debug").innerHTML = "false";	
+ 			}
  		}
  		else {
  			document.getElementById("debug").innerHTML = "false";
