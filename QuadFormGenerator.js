@@ -1,8 +1,8 @@
 <p>Quadratic difficulty (1 - 3)</p>
 
 <input type="radio" name="difficulty" value="1" checked>Level 1
-<input type="radio" name="difficulty" value="2">Level 2
-<input type="radio" name="difficulty" value="2">Level 3
+<input type="radio" name="difficulty" value="2" >Level 2
+<input type="radio" name="difficulty" value="2" >Level 3
 
 <br><br>
 
@@ -20,10 +20,7 @@
 
 <script>
 	var factor_m = null;
-	var x0_m = null;
-	var x1_m = null;
-	var x0_c = null;
-	var x1_c = null;
+	var roots = new Array(2);
 
 	function generateProblem() {
 		document.getElementById("answer").innerHTML = " ";
@@ -41,10 +38,8 @@
 	    var solution = data_raw[1];
 	    
 	    factor_m = solution[0]
-	    x0_c = solution[1];
-	    x0_m = solution[2];
-	    x1_c = solution[3];
-	    x1_m = solution[4];
+	    roots[0] = solution[1] * solution[2];
+	    roots[1] = solution[3] * solution[4];
 	    
 	    document.getElementById("quadratic").innerHTML = formattedQuadratic;
 	}
@@ -57,11 +52,11 @@
  		x1_c_local = _userInput(document.getElementById("x1c").value);
 
     	if(factor_m == factor_m_local) {
- 			if(x0_m == x0_m_local && x0_c == x0_c_local && x1_m == x1_m_local && x1_c == x1_c_local) {
+			userSolution0 = x0_m_local * x0_c_local;
+			userSolution1 = x1_m_local * x1_c_local;
+
+ 			if(roots.indexOf(userSolution0) != -1 && roots.indexOf(userSolution1) != -1) {
  				document.getElementById("answer").innerHTML = "true";
- 			}
- 			else if(x1_m == x0_m_local && x1_c == x0_c_local && x0_m == x1_m_local && x0_c == x1_c_local) {
-				document.getElementById("answer").innerHTML = "true";
  			}
  			else {
  				document.getElementById("answer").innerHTML = "false";	
